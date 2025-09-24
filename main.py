@@ -81,12 +81,22 @@ def init_db():
     # Inserir dados de exemplo mínimos (6 cadastros)
     try:
         c.execute("INSERT INTO users(username,password,fullname,email,phone,role,photo) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                  ("admin", "admin123", "Administrador Chefe", "admin@autorepair.com", "11999990000", "admin", ""))
+                  ("admin", "admin123", "Administrador chefe", "admin@autorepair.com", "1198765432", "admin", ""))
     except sqlite3.IntegrityError:
         pass
     try:
         c.execute("INSERT INTO users(username,password,fullname,email,phone,role,photo) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                  ("cliente1", "cli123", "João Silva", "joao@mail.com", "11988880000", "client", ""))
+                  ("cliente1", "cli123", "João Silva", "enzo@mail.com", "11988880000", "client", ""))
+    except sqlite3.IntegrityError:
+        pass
+    try:
+        c.execute("INSERT INTO users(username,password,fullname,email,phone,role,photo) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                  ("cliente2", "cli123", "Guilherme Gomes", "guilherme@mail.com", "11977770000", "client", ""))
+    except sqlite3.IntegrityError:
+        pass
+    try:
+        c.execute("INSERT INTO users(username,password,fullname,email,phone,role,photo) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                  ("cliente3", "cli123", "Igor Souza", "igor@mail.com", "11966660000", "client", ""))
     except sqlite3.IntegrityError:
         pass
     # mais 4 cadastros (peças/ferramentas)
@@ -123,7 +133,7 @@ class AutoRepairApp:
     def __init__(self, root):
         self.root = root
         root.title("Auto Repair - Sistema Gerenciador de Mecânica")
-        root.geometry("900x600")
+        root.geometry("1440x900")
         root.resizable(False, False)
         self.conn = sqlite3.connect(DB_NAME)
         self.user = None  # usuário logado (dict)
@@ -672,8 +682,8 @@ Observações:
         f = ttk.Frame(win, padding=10); f.pack(fill=tk.BOTH, expand=True)
         ttk.Label(f, text="Auto Repair", font=("Segoe UI", 14)).pack(pady=6)
         ttk.Label(f, text="Sistema de gestão para mecânica automotiva\nDados fictícios - Projeto Escolar").pack(pady=6)
-        ttk.Label(f, text="Contato: contato@autorepair.com\nTelefone: (11) 99999-0000").pack(pady=6)
-        ttk.Label(f, text="Endereço: Rua Exemplo, 123 - Cidade - País").pack(pady=6)
+        ttk.Label(f, text="Contato: contato@autorepair.com\nTelefone: (11) 9876-5432").pack(pady=6)
+        ttk.Label(f, text="Endereço: Rua Eusebio stevaux, 823 - Santo Amaro, São Paulo").pack(pady=6)
         ttk.Button(f, text="Fechar", command=win.destroy).pack(pady=8)
 
     def build_settings_screen(self):
@@ -735,3 +745,4 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = AutoRepairApp(root)
     root.mainloop()
+
